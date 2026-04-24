@@ -160,4 +160,3 @@ knitr::kable(p_values, digits = 2,
                            "Female Republicans", "Male Republicans"))
 ```
 
-
