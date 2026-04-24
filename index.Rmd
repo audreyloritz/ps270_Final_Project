@@ -15,11 +15,7 @@ I am interested in exploring data related to aspects like gender and race and ho
 
 ```{r setup, include=FALSE}
 library(tidyverse)
-library(readr)
 library(broom)
-library(dplyr)
-library(tidyr)
-library(knitr)
 library(infer)
 ```
 
@@ -33,7 +29,7 @@ rep_candidates <- read_csv("data/rep_candidates.csv")
 
 **How does gender impact candidate success in primary elections?**
 
-If a female candidate runs in a democratic primary, then they will have more electoral success than republican female candidates. This assumptions stems from the theory that democratic female candidates will have greater success because democratic voters are historically more supportive of diverse candidates.The explanatory variables are party, determined by which primary the candidate is running in, and gender, determined by campaign materials and interviews with candidates. The outcome variable is primary election success. This is measured in the data set by both Primary Outcome (Won, Lost or Made runoff), and Primary % (percentage of votes in primary election). My hypothesis will be supported if data shows more results of "Won" for female candidates in democratic than republican primaries.
+If a female candidate runs in a democratic primary, then they will have more electoral success than republican female candidates. This assumptions stems from the theory that democratic female candidates will have greater success because democratic voters are historically more supportive of diverse candidates.The explanatory variables are party, determined by which primary the candidate is running in, and gender, determined by campaign materials and interviews with candidates. The outcome variable is primary election success. This is measured in the data set by "Primary %", the percentage of votes a candidate got in their primary election. My hypothesis will be supported if data shows more results of "Won" for female candidates in democratic than republican primaries.
 
 ## Joining Data
 
@@ -151,4 +147,6 @@ knitr::kable(p_values, digits = 2,
              col.names = c("Intercept(Female Democrats)", "Male Democrats",
                            "Female Republicans", "Male Republicans"))
 ```
+
+
 
