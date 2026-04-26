@@ -26,12 +26,7 @@ rep_candidates <- read_csv("data/rep_candidates.csv")
 
 Gender has long been considered an important factor in electoral politics, particularly in recent decades as the number of female candidates has increased across party lines. By narrowing in on primary elections, this analysis not only looks at gendered differences but also at how those differences vary across the partisan divide. Making it possible for this paper to examine gendered differences in primary success both within and between the Democratic and Republican parties. Understanding this relationship is important as it sheds light on whether barriers or advantages for women exist and whether these patterns differ across partisan contexts.
 
-<<<<<<< HEAD
 I hypothesize that the effect of gender on candidate success will differ by party. Specifically, I expect that female candidates will perform better in Democratic primaries than in Republican primaries, where gender may have little or even negative effects. This assumption stems from the idea that Democratic electorates tend to be more supportive of female candidates, while Republican electorates may be less responsive to gender as an advantage. As a result, gender is likely to have a conditional effect on electoral success rather than a uniform one across parties.
-=======
-I hypothesize that the effect of gender on candidate success will differ by party. Specifically, I expect that female candidates will perform better in Democratic primaries than in Republican primaries, where gender may have little or even negative effects. This assumption stems from the idea that Democratic electorates tend to be more supportive of female candidates, while Republican electorates may be less responsive to gender as an advantage. As a result, gender is 
-ill be supported if data shows more results of "Won" for female candidates in democratic than republican primaries.
->>>>>>> 3c46c0ab2fcd74ed0941afb7db9ef32e91a36421
 
 ## Data
 
@@ -49,6 +44,8 @@ elections <- elections |>
   filter(Gender != "Nonbinary")
 ```
 
+The explanatory variables in this paper are party, determined by which primary the candidate is running in, and gender, determined by campaign materials and interviews with candidates. The outcome variable is primary election success, which is measured by the percentage of votes a candidate got during the 2022 primary election. 
+
 
 ```{r, echo=FALSE}
 
@@ -61,7 +58,23 @@ interest <- ggplot(elections, aes(x = `Primary %`, fill = Gender)) +
 
 interest
 ```
+For this paper, there are two comparisons of interest: the difference between male and female candidates within each party, and the difference in effect gender has on the Democratic and Republican parties. To examine this, I will utilize the two hypotheses listed below.
 
+**Party Hypothesis**
+
+*Null Hypothesis:* Gender will have no impact on primary election results in either party.
+
+*Alternative Hypothesis:* Gender affects primary election success; this effect may differ across parties.
+
+Using α = 0.05, the null hypothesis can be rejected if the p-value for one or both of the political parties is less than 0.05. This would indicate that gender does affect primary election results, even if that effect varies across party lines.
+
+**Interaction Hypothesis**
+
+*Null Hypothesis:* The effect of gender on primary election success will not vary by political party.
+
+*Alternative Hypothesis:* The effect of gender on primary election success will vary by political party.
+
+Using α = 0.05, the null hypothesis can be rejected if the p-value of the interaction coefficient is less than 0.05. This would indicate that there is a difference between the role that gender plays in Democratic and Republican primary elections.
 
 ## Results
 
@@ -98,6 +111,7 @@ knitr::kable(fit_table, digits = 2,
              col.names = c("Intercept(Male Republicans)", "Female Republicans",
                            "Male Democats", "Female Democrats"))
 ```
+
 
 
 

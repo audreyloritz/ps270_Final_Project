@@ -1547,16 +1547,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h2 id="introduction">Introduction</h2>
 <p><strong>How does gender impact candidate success in primary elections for the different political parties?</strong></p>
 <p>Gender has long been considered an important factor in electoral politics, particularly in recent decades as the number of female candidates has increased across party lines. By narrowing in on primary elections, this analysis not only looks at gendered differences but also at how those differences vary across the partisan divide. Making it possible for this paper to examine gendered differences in primary success both within and between the Democratic and Republican parties. Understanding this relationship is important as it sheds light on whether barriers or advantages for women exist and whether these patterns differ across partisan contexts.</p>
-<<<<<<< HEAD
 <p>I hypothesize that the effect of gender on candidate success will differ by party. Specifically, I expect that female candidates will perform better in Democratic primaries than in Republican primaries, where gender may have little or even negative effects. This assumption stems from the idea that Democratic electorates tend to be more supportive of female candidates, while Republican electorates may be less responsive to gender as an advantage. As a result, gender is likely to have a conditional effect on electoral success rather than a uniform one across parties.</p>
-=======
-<p>I hypothesize that the effect of gender on candidate success will differ by party. Specifically, I expect that female candidates will perform better in Democratic primaries than in Republican primaries, where gender may have little or even negative effects. This assumption stems from the idea that Democratic electorates tend to be more supportive of female candidates, while Republican electorates may be less responsive to gender as an advantage. As a result, gender is
-ill be supported if data shows more results of “Won” for female candidates in democratic than republican primaries.</p>
->>>>>>> 3c46c0ab2fcd74ed0941afb7db9ef32e91a36421
 <h2 id="data">Data</h2>
+<p>The explanatory variables in this paper are party, determined by which primary the candidate is running in, and gender, determined by campaign materials and interviews with candidates. The outcome variable is primary election success, which is measured by the percentage of votes a candidate got during the 2022 primary election.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" alt="" width="624" /></p>
 </div>
+<p>For this paper, there are two comparisons of interest: the difference between male and female candidates within each party, and the difference in effect gender has on the Democratic and Republican parties. To examine this, I will utilize the two hypotheses listed below.</p>
+<p><strong>Party Hypothesis</strong></p>
+<p><em>Null Hypothesis:</em> Gender will have no impact on primary election results in either party.</p>
+<p><em>Alternative Hypothesis:</em> Gender affects primary election success; this effect may differ across parties.</p>
+<p>Using α = 0.05, the null hypothesis can be rejected if the p-value for one or both of the political parties is less than 0.05. This would indicate that gender does affect primary election results, even if that effect varies across party lines.</p>
+<p><strong>Interaction Hypothesis</strong></p>
+<p><em>Null Hypothesis:</em> The effect of gender on primary election success will not vary by political party.</p>
+<p><em>Alternative Hypothesis:</em> The effect of gender on primary election success will vary by political party.</p>
+<p>Using α = 0.05, the null hypothesis can be rejected if the p-value of the interaction coefficient is less than 0.05. This would indicate that there is a difference between the role that gender plays in Democratic and Republican primary elections.</p>
 <h2 id="results">Results</h2>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" alt="" width="624" /></p>
