@@ -26,7 +26,12 @@ rep_candidates <- read_csv("data/rep_candidates.csv")
 
 Gender has long been considered an important factor in electoral politics, particularly in recent decades as the number of female candidates has increased across party lines. By narrowing in on primary elections, this analysis not only looks at gendered differences but also at how those differences vary across the partisan divide. Making it possible for this paper to examine gendered differences in primary success both within and between the Democratic and Republican parties. Understanding this relationship is important as it sheds light on whether barriers or advantages for women exist and whether these patterns differ across partisan contexts.
 
+<<<<<<< HEAD
 I hypothesize that the effect of gender on candidate success will differ by party. Specifically, I expect that female candidates will perform better in Democratic primaries than in Republican primaries, where gender may have little or even negative effects. This assumption stems from the idea that Democratic electorates tend to be more supportive of female candidates, while Republican electorates may be less responsive to gender as an advantage. As a result, gender is likely to have a conditional effect on electoral success rather than a uniform one across parties.
+=======
+I hypothesize that the effect of gender on candidate success will differ by party. Specifically, I expect that female candidates will perform better in Democratic primaries than in Republican primaries, where gender may have little or even negative effects. This assumption stems from the idea that Democratic electorates tend to be more supportive of female candidates, while Republican electorates may be less responsive to gender as an advantage. As a result, gender is 
+ill be supported if data shows more results of "Won" for female candidates in democratic than republican primaries.
+>>>>>>> 3c46c0ab2fcd74ed0941afb7db9ef32e91a36421
 
 ## Data
 
