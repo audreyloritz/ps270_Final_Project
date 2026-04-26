@@ -1,7 +1,7 @@
 ---
 title: "When Gender Matters"
 author: "Audrey Loritz"
-description: "Party Differences in Candidate Success in Primary Elections"
+description: "Party Differences in Female Candidate Success in Primary Elections"
 output:
   distill::distill_article:
     self_contained: false
@@ -22,9 +22,11 @@ rep_candidates <- read_csv("data/rep_candidates.csv")
 
 ## Introduction
 
-**How does gender impact candidate success in primary elections?**
+**How does gender impact candidate success in primary elections for the different political parties?**
 
-If a female candidate runs in a democratic primary, then they will have more electoral success than republican female candidates. This assumptions stems from the theory that democratic female candidates will have greater success because democratic voters are historically more supportive of diverse candidates.The explanatory variables are party, determined by which primary the candidate is running in, and gender, determined by campaign materials and interviews with candidates. The outcome variable is primary election success. This is measured in the data set by "Primary %", the percentage of votes a candidate got in their primary election. My hypothesis will be supported if data shows more results of "Won" for female candidates in democratic than republican primaries.
+Gender has long been considered an important factor in electoral politics, particularly in recent decades as the number of female candidates has increased across party lines. By narrowing in on primary elections, this analysis not only looks at gendered differences but also at how those differences vary across the partisan divide. Making it possible for this paper to examine gendered differences in primary success both within and between the Democratic and Republican parties. Understanding this relationship is important as it sheds light on whether barriers or advantages for women exist and whether these patterns differ across partisan contexts.
+
+I hypothesize that the effect of gender on candidate success will differ by party. Specifically, I expect that female candidates will perform better in Democratic primaries than in Republican primaries, where gender may have little or even negative effects. This assumption stems from the idea that Democratic electorates tend to be more supportive of female candidates, while Republican electorates may be less responsive to gender as an advantage. As a result, gender is likely to have a conditional effect on electoral success rather than a uniform one across parties.
 
 ## Data
 
