@@ -7,33 +7,27 @@ output:
     self_contained: false
 ---
 
-## Project thoughts
-
-I am interested in exploring data related to aspects like gender and race and how they play into candidate success.
-
-## Downloading Data
-
 ```{r setup, include=FALSE}
 library(tidyverse)
 library(broom)
 library(infer)
 ```
 
-```{r}
+```{r, include=FALSE}
 dem_candidates <- read_csv("data/dem_candidates.csv")
 rep_candidates <- read_csv("data/rep_candidates.csv")
 ```
 
 
-## Research Question
+## Introduction
 
 **How does gender impact candidate success in primary elections?**
 
 If a female candidate runs in a democratic primary, then they will have more electoral success than republican female candidates. This assumptions stems from the theory that democratic female candidates will have greater success because democratic voters are historically more supportive of diverse candidates.The explanatory variables are party, determined by which primary the candidate is running in, and gender, determined by campaign materials and interviews with candidates. The outcome variable is primary election success. This is measured in the data set by "Primary %", the percentage of votes a candidate got in their primary election. My hypothesis will be supported if data shows more results of "Won" for female candidates in democratic than republican primaries.
 
-## Joining Data
+## Data
 
-```{r}
+```{r, include=FALSE}
 elections <- bind_rows(dem_candidates, rep_candidates,
                        .id = "Party")
 
@@ -46,9 +40,9 @@ elections <- elections |>
   filter(Gender != "Nonbinary")
 ```
 
-## Visulization
+## Results
 
-```{r}
+```{r, echo=FALSE}
 party_gender_success <- elections |> group_by(Party, Gender) |>
            summarise(avg_primary = mean(`Primary %`, na.rm = TRUE)) |>
   ggplot(aes(x = Party, y = avg_primary, fill = Gender)) + 
@@ -63,71 +57,9 @@ party_gender_success
 
 This graph demonstrates primary success based on gender within the two main political parties. The average Democratic vote percentage for female candidates is just over 50%, whereas female Republicans only got an average of under 30% in their elections. Female candidates in Democratic primaries saw greater success than those in Republican primaries.
 
-## Regression
-
-```{r}
-dem_elections <- elections |>
-  filter(Party == "Democrat")
-
-rep_elections <- elections |>
-  filter(Party == "Republican")
-```
 
 
-```{r}
-dem_fit <- lm(`Primary %` ~ Gender, data = dem_elections)
-
-rep_fit <- lm(`Primary %` ~ Gender, data = rep_elections)
-
-dem_table <- tidy(dem_fit) |> mutate(model = "Dem")
-rep_table <- tidy(rep_fit) |> mutate(model = "Rep")
-
-dem_table |>
-  select(term, estimate) |>
-  pivot_wider(names_from = term, values_from = estimate)
-
-rep_table |>
-  select(term, estimate) |>
-  pivot_wider(names_from = term, values_from = estimate)
-
-combined_table <- bind_rows(dem_table, rep_table)
-  
-combined_table <- combined_table |>
-  mutate(term = recode(term,
-    "(Intercept)" = "Female Candidates",
-    "GenderMale" = "Male difference")) |>
-  select(model, term, estimate) |>
-  pivot_wider(names_from = model, values_from = estimate)
-
-knitr::kable(combined_table, digits = 2,
-             col.names = c("Term", "Democrat", "Republican"))
-```
-
-```{r}
-dem_p_value <- dem_table |>
-  select(term, p.value) |>
-  pivot_wider(names_from = term, values_from = p.value)
-
-knitr::kable(dem_p_value, digits = 2,
-             col.names = c("Female Candidates", "Male Difference"))
-```
-
-```{r}
-rep_p_value <- rep_table |>
-  select(term, p.value) |>
-  pivot_wider(names_from = term, values_from = p.value)
-
-knitr::kable(rep_p_value, digits = 2,
-             col.names = c("Female Candidates", "Male Difference"))
-```
-
-
-The table displays the relationship between gender and primary election results for democrats and republicans. The average female democrat got 52.32% of the votes in their primary election, and on average male candidates got 12.62 percentage points less votes. On the other hand, republican female candidates got on average 28.42% of the votes, and the average male candidates got 2.97 percentage points of votes in their primary elections. This supports my hypothesis as it demonstrates because democrat women are more successful in their primaries than republican women compared to the men in their respective parties.
-
-
-## Interaction Coefficient Regression
-
-```{r}
+```{r, echo=FALSE}
 fit <- lm(`Primary %` ~ 
             relevel(as.factor(Gender), ref = "Male") * 
             relevel(as.factor(Party), ref = "Republican"),
@@ -145,7 +77,8 @@ knitr::kable(fit_table, digits = 2,
 
 
 Standard Error
-```{r}
+
+```{r, echo=FALSE}
 std_er <- tidy(fit) |>
   select(term, std.error) |>
   pivot_wider(names_from = term, values_from = std.error)
@@ -156,7 +89,8 @@ knitr::kable(std_er, digits = 2,
 ```
 
 P-Values
-```{r, include=FALSE}
+
+```{r, echo=FALSE}
 p_values <- tidy(fit) |>
   select(term, p.value) |>
   pivot_wider(names_from = term, values_from = p.value)
