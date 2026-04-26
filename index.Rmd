@@ -126,17 +126,23 @@ The table displays the relationship between gender and primary election results 
 
 
 ## Interaction Coefficient Regression
+
 ```{r}
-fit <- lm(`Primary %` ~ Gender * Party, data = elections)
+fit <- lm(`Primary %` ~ 
+            relevel(as.factor(Gender), ref = "Male") * 
+            relevel(as.factor(Party), ref = "Republican"),
+          data = elections)
 
 fit_table <- tidy(fit) |>
   select(term, estimate) |>
   pivot_wider(names_from = term, values_from = estimate)
 
 knitr::kable(fit_table, digits = 2,
-             col.names = c("Intercept(Female Democrats)", "Male Democrats",
-                           "Female Republicans", "Male Republicans"))
+             col.names = c("Intercept(Male Republicans)", "Female Republicans",
+                           "Male Democats", "Female Democrats"))
 ```
+
+
 
 Standard Error
 ```{r}
@@ -145,18 +151,21 @@ std_er <- tidy(fit) |>
   pivot_wider(names_from = term, values_from = std.error)
 
 knitr::kable(std_er, digits = 2,
-             col.names = c("Intercept(Female Democrats)", "Male Democrats",
-                           "Female Republicans", "Male Republicans"))
+             col.names = c("Intercept(Male Republicans)", "Female Republicans",
+                           "Male Democats", "Female Democrats"))
 ```
 
 P-Values
-```{r}
+```{r, include=FALSE}
 p_values <- tidy(fit) |>
   select(term, p.value) |>
   pivot_wider(names_from = term, values_from = p.value)
 
 knitr::kable(p_values, digits = 2,
-             col.names = c("Intercept(Female Democrats)", "Male Democrats",
-                           "Female Republicans", "Male Republicans"))
+             col.names = c("Intercept(Male Republicans)", "Female Republicans",
+                           "Male Democats", "Female Democrats"))
 ```
 
+```{r print-code, ref.label=knitr::all_labels(), echo = TRUE, eval=FALSE}
+
+```

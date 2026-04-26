@@ -1711,36 +1711,39 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h2 id="interaction-coefficient-regression">Interaction Coefficient Regression</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>`Primary %`</span> <span class='op'>~</span> <span class='va'>Gender</span> <span class='op'>*</span> <span class='va'>Party</span>, data <span class='op'>=</span> <span class='va'>elections</span><span class='op'>)</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>`Primary %`</span> <span class='op'>~</span> </span>
+<span>            <span class='fu'><a href='https://rdrr.io/r/stats/relevel.html'>relevel</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>Gender</span><span class='op'>)</span>, ref <span class='op'>=</span> <span class='st'>"Male"</span><span class='op'>)</span> <span class='op'>*</span> </span>
+<span>            <span class='fu'><a href='https://rdrr.io/r/stats/relevel.html'>relevel</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>Party</span><span class='op'>)</span>, ref <span class='op'>=</span> <span class='st'>"Republican"</span><span class='op'>)</span>,</span>
+<span>          data <span class='op'>=</span> <span class='va'>elections</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>fit_table</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>estimate</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>term</span>, values_from <span class='op'>=</span> <span class='va'>estimate</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>fit_table</span>, digits <span class='op'>=</span> <span class='fl'>2</span>,</span>
-<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Intercept(Female Democrats)"</span>, <span class='st'>"Male Democrats"</span>,</span>
-<span>                           <span class='st'>"Female Republicans"</span>, <span class='st'>"Male Republicans"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Intercept(Male Republicans)"</span>, <span class='st'>"Female Republicans"</span>,</span>
+<span>                           <span class='st'>"Male Democats"</span>, <span class='st'>"Female Democrats"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
 <table>
 <colgroup>
 <col style="width: 35%" />
-<col style="width: 18%" />
 <col style="width: 24%" />
+<col style="width: 17%" />
 <col style="width: 21%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: right;">Intercept(Female Democrats)</th>
-<th style="text-align: right;">Male Democrats</th>
+<th style="text-align: right;">Intercept(Male Republicans)</th>
 <th style="text-align: right;">Female Republicans</th>
-<th style="text-align: right;">Male Republicans</th>
+<th style="text-align: right;">Male Democats</th>
+<th style="text-align: right;">Female Democrats</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">52.32</td>
-<td style="text-align: right;">-12.62</td>
-<td style="text-align: right;">-23.89</td>
+<td style="text-align: right;">31.39</td>
+<td style="text-align: right;">-2.97</td>
+<td style="text-align: right;">8.3</td>
 <td style="text-align: right;">15.59</td>
 </tr>
 </tbody>
@@ -1754,69 +1757,132 @@ Standard Error
 <span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>term</span>, values_from <span class='op'>=</span> <span class='va'>std.error</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>std_er</span>, digits <span class='op'>=</span> <span class='fl'>2</span>,</span>
-<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Intercept(Female Democrats)"</span>, <span class='st'>"Male Democrats"</span>,</span>
-<span>                           <span class='st'>"Female Republicans"</span>, <span class='st'>"Male Republicans"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Intercept(Male Republicans)"</span>, <span class='st'>"Female Republicans"</span>,</span>
+<span>                           <span class='st'>"Male Democats"</span>, <span class='st'>"Female Democrats"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
 <table>
 <colgroup>
 <col style="width: 35%" />
-<col style="width: 18%" />
 <col style="width: 24%" />
+<col style="width: 17%" />
 <col style="width: 21%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: right;">Intercept(Female Democrats)</th>
-<th style="text-align: right;">Male Democrats</th>
+<th style="text-align: right;">Intercept(Male Republicans)</th>
 <th style="text-align: right;">Female Republicans</th>
-<th style="text-align: right;">Male Republicans</th>
+<th style="text-align: right;">Male Democats</th>
+<th style="text-align: right;">Female Democrats</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">1.77</td>
-<td style="text-align: right;">2.19</td>
-<td style="text-align: right;">2.58</td>
+<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">2.11</td>
+<td style="text-align: right;">1.62</td>
 <td style="text-align: right;">3.05</td>
 </tr>
 </tbody>
 </table>
 </div>
-P-Values
+<p>P-Values</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>p_values</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://broom.tidymodels.org/'>broom</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tidymodels/infer'>infer</a></span><span class='op'>)</span></span>
+<span><span class='va'>dem_candidates</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"data/dem_candidates.csv"</span><span class='op'>)</span></span>
+<span><span class='va'>rep_candidates</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"data/rep_candidates.csv"</span><span class='op'>)</span></span>
+<span><span class='va'>elections</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/bind_rows.html'>bind_rows</a></span><span class='op'>(</span><span class='va'>dem_candidates</span>, <span class='va'>rep_candidates</span>,</span>
+<span>                       .id <span class='op'>=</span> <span class='st'>"Party"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>elections</span> <span class='op'>&lt;-</span> <span class='va'>elections</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>Candidate</span>, <span class='va'>Party</span>, <span class='va'>Gender</span>, <span class='va'>`Race 1`</span>, <span class='va'>Office</span>, <span class='va'>`Primary Outcome`</span>, <span class='va'>`Primary %`</span>, <span class='va'>`Runoff Outcome`</span>, <span class='va'>`Runoff %`</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>Party <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>Party</span> <span class='op'>==</span> <span class='fl'>1</span>, <span class='st'>"Democrat"</span>, <span class='st'>"Republican"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>elections</span> <span class='op'>&lt;-</span> <span class='va'>elections</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>`Primary %` <span class='op'>=</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/parse_number.html'>parse_number</a></span><span class='op'>(</span><span class='va'>`Primary %`</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>Gender</span> <span class='op'>!=</span> <span class='st'>"Nonbinary"</span><span class='op'>)</span></span>
+<span><span class='va'>party_gender_success</span> <span class='op'>&lt;-</span> <span class='va'>elections</span> <span class='op'>|&gt;</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>Party</span>, <span class='va'>Gender</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>           <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span>avg_primary <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>`Primary %`</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Party</span>, y <span class='op'>=</span> <span class='va'>avg_primary</span>, fill <span class='op'>=</span> <span class='va'>Gender</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"dodge"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_fill_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Female"</span> <span class='op'>=</span> <span class='st'>"pink"</span>, <span class='st'>"Male"</span> <span class='op'>=</span> <span class='st'>"lightblue"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Party"</span>, y <span class='op'>=</span> <span class='st'>"Average Primary Vote Percentage"</span>, </span>
+<span>       title <span class='op'>=</span> <span class='st'>"Gender Breakdown of Primary Success by Party"</span>, </span>
+<span>       subtitle <span class='op'>=</span> <span class='st'>"Data from 2022 primary elections"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>party_gender_success</span></span>
+<span><span class='va'>dem_elections</span> <span class='op'>&lt;-</span> <span class='va'>elections</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>Party</span> <span class='op'>==</span> <span class='st'>"Democrat"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>rep_elections</span> <span class='op'>&lt;-</span> <span class='va'>elections</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>Party</span> <span class='op'>==</span> <span class='st'>"Republican"</span><span class='op'>)</span></span>
+<span><span class='va'>dem_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>`Primary %`</span> <span class='op'>~</span> <span class='va'>Gender</span>, data <span class='op'>=</span> <span class='va'>dem_elections</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>rep_fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>`Primary %`</span> <span class='op'>~</span> <span class='va'>Gender</span>, data <span class='op'>=</span> <span class='va'>rep_elections</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>dem_table</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>dem_fit</span><span class='op'>)</span> <span class='op'>|&gt;</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>model <span class='op'>=</span> <span class='st'>"Dem"</span><span class='op'>)</span></span>
+<span><span class='va'>rep_table</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>rep_fit</span><span class='op'>)</span> <span class='op'>|&gt;</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>model <span class='op'>=</span> <span class='st'>"Rep"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>dem_table</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>estimate</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>term</span>, values_from <span class='op'>=</span> <span class='va'>estimate</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>rep_table</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>estimate</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>term</span>, values_from <span class='op'>=</span> <span class='va'>estimate</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>combined_table</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/bind_rows.html'>bind_rows</a></span><span class='op'>(</span><span class='va'>dem_table</span>, <span class='va'>rep_table</span><span class='op'>)</span></span>
+<span>  </span>
+<span><span class='va'>combined_table</span> <span class='op'>&lt;-</span> <span class='va'>combined_table</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>term <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/recode.html'>recode</a></span><span class='op'>(</span><span class='va'>term</span>,</span>
+<span>    <span class='st'>"(Intercept)"</span> <span class='op'>=</span> <span class='st'>"Female Candidates"</span>,</span>
+<span>    <span class='st'>"GenderMale"</span> <span class='op'>=</span> <span class='st'>"Male difference"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>term</span>, <span class='va'>estimate</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>model</span>, values_from <span class='op'>=</span> <span class='va'>estimate</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>combined_table</span>, digits <span class='op'>=</span> <span class='fl'>2</span>,</span>
+<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Term"</span>, <span class='st'>"Democrat"</span>, <span class='st'>"Republican"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>dem_p_value</span> <span class='op'>&lt;-</span> <span class='va'>dem_table</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>p.value</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>term</span>, values_from <span class='op'>=</span> <span class='va'>p.value</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>dem_p_value</span>, digits <span class='op'>=</span> <span class='fl'>2</span>,</span>
+<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Female Candidates"</span>, <span class='st'>"Male Difference"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>rep_p_value</span> <span class='op'>&lt;-</span> <span class='va'>rep_table</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>p.value</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>term</span>, values_from <span class='op'>=</span> <span class='va'>p.value</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>rep_p_value</span>, digits <span class='op'>=</span> <span class='fl'>2</span>,</span>
+<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Female Candidates"</span>, <span class='st'>"Male Difference"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>`Primary %`</span> <span class='op'>~</span> </span>
+<span>            <span class='fu'><a href='https://rdrr.io/r/stats/relevel.html'>relevel</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>Gender</span><span class='op'>)</span>, ref <span class='op'>=</span> <span class='st'>"Male"</span><span class='op'>)</span> <span class='op'>*</span> </span>
+<span>            <span class='fu'><a href='https://rdrr.io/r/stats/relevel.html'>relevel</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>Party</span><span class='op'>)</span>, ref <span class='op'>=</span> <span class='st'>"Republican"</span><span class='op'>)</span>,</span>
+<span>          data <span class='op'>=</span> <span class='va'>elections</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>fit_table</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>estimate</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>term</span>, values_from <span class='op'>=</span> <span class='va'>estimate</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>fit_table</span>, digits <span class='op'>=</span> <span class='fl'>2</span>,</span>
+<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Intercept(Male Republicans)"</span>, <span class='st'>"Female Republicans"</span>,</span>
+<span>                           <span class='st'>"Male Democats"</span>, <span class='st'>"Female Democrats"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>std_er</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>std.error</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>term</span>, values_from <span class='op'>=</span> <span class='va'>std.error</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>std_er</span>, digits <span class='op'>=</span> <span class='fl'>2</span>,</span>
+<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Intercept(Male Republicans)"</span>, <span class='st'>"Female Republicans"</span>,</span>
+<span>                           <span class='st'>"Male Democats"</span>, <span class='st'>"Female Democrats"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>p_values</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>p.value</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>term</span>, values_from <span class='op'>=</span> <span class='va'>p.value</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>p_values</span>, digits <span class='op'>=</span> <span class='fl'>2</span>,</span>
-<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Intercept(Female Democrats)"</span>, <span class='st'>"Male Democrats"</span>,</span>
-<span>                           <span class='st'>"Female Republicans"</span>, <span class='st'>"Male Republicans"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Intercept(Male Republicans)"</span>, <span class='st'>"Female Republicans"</span>,</span>
+<span>                           <span class='st'>"Male Democats"</span>, <span class='st'>"Female Democrats"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
-<table>
-<colgroup>
-<col style="width: 35%" />
-<col style="width: 18%" />
-<col style="width: 24%" />
-<col style="width: 21%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: right;">Intercept(Female Democrats)</th>
-<th style="text-align: right;">Male Democrats</th>
-<th style="text-align: right;">Female Republicans</th>
-<th style="text-align: right;">Male Republicans</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-</tbody>
-</table>
 </div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
