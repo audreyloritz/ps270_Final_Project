@@ -1,7 +1,7 @@
 ---
-title: "PS270 Final Project"
+title: "When Gender Matters"
 author: "Audrey Loritz"
-description: "My final project"
+description: "Party Differences in Candidate Success in Primary Elections"
 output:
   distill::distill_article:
     self_contained: false
@@ -14,6 +14,7 @@ library(infer)
 ```
 
 ```{r, include=FALSE}
+
 dem_candidates <- read_csv("data/dem_candidates.csv")
 rep_candidates <- read_csv("data/rep_candidates.csv")
 ```
@@ -28,6 +29,7 @@ If a female candidate runs in a democratic primary, then they will have more ele
 ## Data
 
 ```{r, include=FALSE}
+
 elections <- bind_rows(dem_candidates, rep_candidates,
                        .id = "Party")
 
@@ -40,9 +42,24 @@ elections <- elections |>
   filter(Gender != "Nonbinary")
 ```
 
+
+```{r, echo=FALSE}
+
+interest <- ggplot(elections, aes(x = `Primary %`, fill = Gender)) +
+  geom_histogram() +
+  scale_fill_manual(values = c("Female" = "pink", "Male" = "lightblue")) +
+  labs(x = "Average Primary Vote Percentage", y = "Count",
+       title = "Distrabution of Primary Vote Percentages by Gender",
+       subtitle = "Data from 2022 primary elections")
+
+interest
+```
+
+
 ## Results
 
 ```{r, echo=FALSE}
+
 party_gender_success <- elections |> group_by(Party, Gender) |>
            summarise(avg_primary = mean(`Primary %`, na.rm = TRUE)) |>
   ggplot(aes(x = Party, y = avg_primary, fill = Gender)) + 
@@ -60,6 +77,7 @@ This graph demonstrates primary success based on gender within the two main poli
 
 
 ```{r, echo=FALSE}
+
 fit <- lm(`Primary %` ~ 
             relevel(as.factor(Gender), ref = "Male") * 
             relevel(as.factor(Party), ref = "Republican"),
@@ -79,6 +97,7 @@ knitr::kable(fit_table, digits = 2,
 Standard Error
 
 ```{r, echo=FALSE}
+
 std_er <- tidy(fit) |>
   select(term, std.error) |>
   pivot_wider(names_from = term, values_from = std.error)
@@ -91,6 +110,7 @@ knitr::kable(std_er, digits = 2,
 P-Values
 
 ```{r, echo=FALSE}
+
 p_values <- tidy(fit) |>
   select(term, p.value) |>
   pivot_wider(names_from = term, values_from = p.value)
