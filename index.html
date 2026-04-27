@@ -1595,7 +1595,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </tbody>
 </table>
 </div>
-<p>The regression as displayed with an interaction coefficient demonstrates that gender has different effects on candidate success depending on party affiliation. Among Republicans, female candidates receive approximately 2.97 percentage points less of the vote than male candidates, suggesting a slight disadvantage for women within the party. In contrast, among Democrats, female candidates outperform male candidates by about 12.62 percentage points. This estimate comes from combining the baseline gender effect (−2.97) with the interaction effect for Democratic women (+15.59). These differing results indicate that gender impacts elections in inconsistent ways across the political parties, suggesting that party is a crucial context for the influences of gender on primary election outcomes.</p>
+<p>The regression, as displayed with an interaction coefficient, demonstrates that gender has different effects on candidate success depending on party affiliation. Among Republicans, female candidates receive approximately 2.97 percentage points less of the vote than male candidates, suggesting a slight disadvantage for women within the party. In contrast, among Democrats, female candidates outperform male candidates by about 12.62 percentage points. This estimate comes from adding the baseline gender effect (−2.97) with the combined effect of being both female and democratic (+15.59). These differing results indicate that gender impacts elections in inconsistent ways across the political parties, suggesting that party is a crucial context for the influences of gender on primary election outcomes. This regression supports both hypotheses because not only is there a difference between genders within both parties, but also the effects are contrasting.</p>
 <p><em>Standard Error</em></p>
 <div class="layout-chunk" data-layout="l-body">
 <table>
@@ -1650,6 +1650,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </tbody>
 </table>
 </div>
+<p>Using the standard errors and p-values, it can be concluded that only the interaction hypothesis is statistically significant under α = 0.05.</p>
+<p>The gender hypothesis can not be rejected because the p-value for the difference between male and female Republicans is greater than the 0.05 level. This means that there is not sufficient information to reject the null hypothesis and prove that the observed difference between the genders was not due to chance alone.</p>
+<p>Despite this, the interaction hypothesis can still be rejected because the p-value for the interaction coefficient is less than 0.05. Indicating that we can reject the null hypothesis and prove with statistical significance that there is a difference in the effect of gender on primary election success between Democrats and Republicans, and the results found from the regression were likely not due to chance alone. While there is statistical significance, this relationship can not be deemed causal. Since the data comes from an observational study rather than a randomly assigned experiment, it is possible that the outcome stems from a missed confounding variable. Without controlling for these potential confounders or using a causal research design, the results can only demonstrate correlation, not causation.</p>
+<h2 id="conclusion">Conclusion</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
