@@ -1567,21 +1567,22 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" alt="" width="624" /></p>
 </div>
-<p>This graph demonstrates primary success based on gender within the two main political parties. The average Democratic vote percentage for female candidates is just over 50%, whereas female Republicans only got an average of under 30% in their elections. Female candidates in Democratic primaries saw greater success than those in Republican primaries.</p>
+<p>This graph demonstrates primary success based on gender within the two main political parties. The average Democratic vote percentage for female candidates is just over 50%, whereas female Republicans only got an average of under 30% in their elections. Female candidates in Democratic primaries saw greater success than those in Republican primaries. Furthermore, the graph demonstrates that Democratic women not only saw more success in absolute vote share than Republican women, but they also had greater success compared to their male counterparts than Republican women.</p>
+<em>Regression Analysis</em>
 <div class="layout-chunk" data-layout="l-body">
 <table>
 <colgroup>
-<col style="width: 35%" />
-<col style="width: 24%" />
-<col style="width: 17%" />
-<col style="width: 21%" />
+<col style="width: 22%" />
+<col style="width: 23%" />
+<col style="width: 22%" />
+<col style="width: 31%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: right;">Intercept(Male Republicans)</th>
-<th style="text-align: right;">Female Republicans</th>
-<th style="text-align: right;">Male Democats</th>
-<th style="text-align: right;">Female Democrats</th>
+<th style="text-align: right;">Male Republicans</th>
+<th style="text-align: right;">Gender Difference</th>
+<th style="text-align: right;">Party Difference</th>
+<th style="text-align: right;">Interaction Coefficient</th>
 </tr>
 </thead>
 <tbody>
@@ -1594,21 +1595,22 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </tbody>
 </table>
 </div>
+<p>The regression as displayed with an interaction coefficient demonstrates that gender has different effects on candidate success depending on party affiliation. Among Republicans, female candidates receive approximately 2.97 percentage points less of the vote than male candidates, suggesting a slight disadvantage for women within the party. In contrast, among Democrats, female candidates outperform male candidates by about 12.62 percentage points. This estimate comes from combining the baseline gender effect (−2.97) with the interaction effect for Democratic women (+15.59). These differing results indicate that gender impacts elections in inconsistent ways across the political parties, suggesting that party is a crucial context for the influences of gender on primary election outcomes.</p>
 <p><em>Standard Error</em></p>
 <div class="layout-chunk" data-layout="l-body">
 <table>
 <colgroup>
-<col style="width: 35%" />
-<col style="width: 24%" />
-<col style="width: 17%" />
-<col style="width: 21%" />
+<col style="width: 22%" />
+<col style="width: 23%" />
+<col style="width: 22%" />
+<col style="width: 31%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: right;">Intercept(Male Republicans)</th>
-<th style="text-align: right;">Female Republicans</th>
-<th style="text-align: right;">Male Democats</th>
-<th style="text-align: right;">Female Democrats</th>
+<th style="text-align: right;">Male Republicans</th>
+<th style="text-align: right;">Gender Difference</th>
+<th style="text-align: right;">Party Difference</th>
+<th style="text-align: right;">Interaction Coefficient</th>
 </tr>
 </thead>
 <tbody>
@@ -1625,17 +1627,17 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 <table>
 <colgroup>
-<col style="width: 35%" />
-<col style="width: 24%" />
-<col style="width: 17%" />
-<col style="width: 21%" />
+<col style="width: 22%" />
+<col style="width: 23%" />
+<col style="width: 22%" />
+<col style="width: 31%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: right;">Intercept(Male Republicans)</th>
-<th style="text-align: right;">Female Republicans</th>
-<th style="text-align: right;">Male Democats</th>
-<th style="text-align: right;">Female Democrats</th>
+<th style="text-align: right;">Male Republicans</th>
+<th style="text-align: right;">Gender Difference</th>
+<th style="text-align: right;">Party Difference</th>
+<th style="text-align: right;">Interaction Coefficient</th>
 </tr>
 </thead>
 <tbody>
@@ -1698,24 +1700,24 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>term</span>, values_from <span class='op'>=</span> <span class='va'>estimate</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>fit_table</span>, digits <span class='op'>=</span> <span class='fl'>2</span>,</span>
-<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Intercept(Male Republicans)"</span>, <span class='st'>"Female Republicans"</span>,</span>
-<span>                           <span class='st'>"Male Democats"</span>, <span class='st'>"Female Democrats"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Male Republicans"</span>, <span class='st'>"Gender Difference"</span>,</span>
+<span>                           <span class='st'>"Party Difference"</span>, <span class='st'>"Interaction Coefficient"</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>std_er</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>std.error</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>term</span>, values_from <span class='op'>=</span> <span class='va'>std.error</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>std_er</span>, digits <span class='op'>=</span> <span class='fl'>2</span>,</span>
-<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Intercept(Male Republicans)"</span>, <span class='st'>"Female Republicans"</span>,</span>
-<span>                           <span class='st'>"Male Democats"</span>, <span class='st'>"Female Democrats"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Male Republicans"</span>, <span class='st'>"Gender Difference"</span>,</span>
+<span>                           <span class='st'>"Party Difference"</span>, <span class='st'>"Interaction Coefficient"</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>p_values</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>p.value</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>term</span>, values_from <span class='op'>=</span> <span class='va'>p.value</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>p_values</span>, digits <span class='op'>=</span> <span class='fl'>2</span>,</span>
-<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Intercept(Male Republicans)"</span>, <span class='st'>"Female Republicans"</span>,</span>
-<span>                           <span class='st'>"Male Democats"</span>, <span class='st'>"Female Democrats"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Male Republicans"</span>, <span class='st'>"Gender Difference"</span>,</span>
+<span>                           <span class='st'>"Party Difference"</span>, <span class='st'>"Interaction Coefficient"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>

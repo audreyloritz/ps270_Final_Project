@@ -94,10 +94,10 @@ party_gender_success <- elections |> group_by(Party, Gender) |>
 party_gender_success
 ```
 
-This graph demonstrates primary success based on gender within the two main political parties. The average Democratic vote percentage for female candidates is just over 50%, whereas female Republicans only got an average of under 30% in their elections. Female candidates in Democratic primaries saw greater success than those in Republican primaries.
+This graph demonstrates primary success based on gender within the two main political parties. The average Democratic vote percentage for female candidates is just over 50%, whereas female Republicans only got an average of under 30% in their elections. Female candidates in Democratic primaries saw greater success than those in Republican primaries. Furthermore, the graph demonstrates that Democratic women not only saw more success in absolute vote share than Republican women, but they also had greater success compared to their male counterparts than Republican women.
 
 
-
+*Regression Analysis*
 ```{r, echo=FALSE}
 
 fit <- lm(`Primary %` ~ 
@@ -110,10 +110,11 @@ fit_table <- tidy(fit) |>
   pivot_wider(names_from = term, values_from = estimate)
 
 knitr::kable(fit_table, digits = 2,
-             col.names = c("Intercept(Male Republicans)", "Female Republicans",
-                           "Male Democats", "Female Democrats"))
+             col.names = c("Male Republicans", "Gender Difference",
+                           "Party Difference", "Interaction Coefficient"))
 ```
 
+The regression as displayed with an interaction coefficient demonstrates that gender has different effects on candidate success depending on party affiliation. Among Republicans, female candidates receive approximately 2.97 percentage points less of the vote than male candidates, suggesting a slight disadvantage for women within the party. In contrast, among Democrats, female candidates outperform male candidates by about 12.62 percentage points. This estimate comes from combining the baseline gender effect (−2.97) with the interaction effect for Democratic women (+15.59). These differing results indicate that gender impacts elections in inconsistent ways across the political parties, suggesting that party is a crucial context for the influences of gender on primary election outcomes.
 
 
 
@@ -126,8 +127,8 @@ std_er <- tidy(fit) |>
   pivot_wider(names_from = term, values_from = std.error)
 
 knitr::kable(std_er, digits = 2,
-             col.names = c("Intercept(Male Republicans)", "Female Republicans",
-                           "Male Democats", "Female Democrats"))
+             col.names = c("Male Republicans", "Gender Difference",
+                           "Party Difference", "Interaction Coefficient"))
 ```
 
 *P-Values*
@@ -139,8 +140,8 @@ p_values <- tidy(fit) |>
   pivot_wider(names_from = term, values_from = p.value)
 
 knitr::kable(p_values, digits = 2,
-             col.names = c("Intercept(Male Republicans)", "Female Republicans",
-                           "Male Democats", "Female Democrats"))
+             col.names = c("Male Republicans", "Gender Difference",
+                           "Party Difference", "Interaction Coefficient"))
 ```
 
 ```{r print-code, ref.label=knitr::all_labels(), echo = TRUE, eval=FALSE}
