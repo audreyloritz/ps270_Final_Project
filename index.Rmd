@@ -44,7 +44,7 @@ elections <- elections |>
   filter(Gender != "Nonbinary")
 ```
 
-The explanatory variables in this paper are party, determined by which primary the candidate is running in, and gender, determined by campaign materials and interviews with candidates. The outcome variable is primary election success, which is measured by the percentage of votes a candidate got during the 2022 primary election. 
+The data used in this analysis comes from a combined data set of Democratic and Republican results from the 2022 primary elections. The explanatory variables are party, determined by which primary the candidate is running in, and gender, determined by campaign materials and interviews with candidates. The outcome variable is primary election success, which is measured by the percentage of votes a candidate got during the 2022 primary election. 
 
 
 The graph below displays the distribution of primary election vote share, the main outcome of interest. Additionally, it indicates the different distribution of male and female vote shares to illustrate how that variation of interest looks.
