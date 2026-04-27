@@ -7,8 +7,6 @@ output:
   self_contained: false
 ---
 
-## Introduction
-
 ```{r setup, include=FALSE}
 library(tidyverse)
 library(broom)
@@ -21,6 +19,7 @@ dem_candidates <- read_csv("data/dem_candidates.csv")
 rep_candidates <- read_csv("data/rep_candidates.csv")
 ```
 
+## Introduction
 
 **How does gender impact candidate success in primary elections for the different political parties?**
 
