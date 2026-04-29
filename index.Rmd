@@ -25,7 +25,7 @@ rep_candidates <- read_csv("data/rep_candidates.csv")
 
 Gender has long been considered an important factor in electoral politics, particularly in recent decades as the number of female candidates has increased across party lines. By narrowing in on primary elections, it is possible to examine gendered differences in primary success both within and between the Democratic and Republican parties. Understanding this relationship is important as it sheds light on whether barriers or advantages for women exist and whether these patterns differ across partisan contexts.
 
-I hypothesize that the effect of gender on candidate success will differ by party. Specifically, I expect that female candidates will perform better in Democratic primaries than in Republican primaries, where gender may have little or even negative effects. This assumption stems from the idea that Democratic electorates tend to be more supportive of female candidates, while Republican electorates may be less responsive to gender as an advantage. As a result, gender is likely to have a conditional effect on electoral success rather than a uniform one across parties.
+I hypothesize that the effect of gender on candidate success will differ by party. Specifically, I expect that female candidates will perform better in Democratic primaries than in Republican primaries, where gender will have negative effects for female candidates. This assumption stems from the idea that Democratic electorates tend to be more supportive of female candidates, while Republican electorates may be less responsive to gender as an advantage. As a result, gender is likely to have a conditional effect on electoral success rather than a uniform one across parties.
 
 ## Data
 
@@ -64,11 +64,11 @@ For this paper, there are two comparisons of interest: the difference between ma
 
 <center> **Party Hypothesis** </center>
 
-*Null Hypothesis:* Gender will have no impact on primary election results in either party.
+*Null Hypothesis:* Gender will have no impact on primary election results within each party.
 
-*Alternative Hypothesis:* Gender affects primary election success; this effect may differ across parties.
+*Alternative Hypothesis:* Gender impacts primary election success within each party.
 
-Using α = 0.05, the null hypothesis can be rejected if the p-value for one or both of the political parties is less than 0.05. This would indicate that gender does affect primary election results, even if that effect varies across party lines.
+Using α = 0.05, the null hypothesis can be rejected if the p-value both parties is less than 0.05. This would indicate that gender does affect primary election results, even if that effect varies across party lines in terms of advantage or disadvantage.
 
 <center> **Interaction Hypothesis** </center>
 
@@ -142,7 +142,7 @@ knitr::kable(p_values, digits = 2,
                            "Party Difference", "Interaction Coefficient"))
 ```
 
-Using the standard errors and p-values, it can be concluded that only the interaction hypothesis is statistically significant under α = 0.05. 
+*Using the standard errors and p-values, it can be concluded that only the interaction hypothesis is statistically significant under α = 0.05.*
 
 The gender hypothesis can not be rejected because the p-value for the difference between male and female Republicans is greater than the 0.05 level. This means that there is not sufficient information to reject the null hypothesis and prove that the observed difference between the genders was not due to chance alone. 
 

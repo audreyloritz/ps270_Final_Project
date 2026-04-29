@@ -2387,7 +2387,7 @@ distill-header .nav a {
 <h2 id="introduction">Introduction</h2>
 <p><strong>How does gender impact candidate success in primary elections for the different political parties?</strong></p>
 <p>Gender has long been considered an important factor in electoral politics, particularly in recent decades as the number of female candidates has increased across party lines. By narrowing in on primary elections, it is possible to examine gendered differences in primary success both within and between the Democratic and Republican parties. Understanding this relationship is important as it sheds light on whether barriers or advantages for women exist and whether these patterns differ across partisan contexts.</p>
-<p>I hypothesize that the effect of gender on candidate success will differ by party. Specifically, I expect that female candidates will perform better in Democratic primaries than in Republican primaries, where gender may have little or even negative effects. This assumption stems from the idea that Democratic electorates tend to be more supportive of female candidates, while Republican electorates may be less responsive to gender as an advantage. As a result, gender is likely to have a conditional effect on electoral success rather than a uniform one across parties.</p>
+<p>I hypothesize that the effect of gender on candidate success will differ by party. Specifically, I expect that female candidates will perform better in Democratic primaries than in Republican primaries, where gender will have negative effects for female candidates. This assumption stems from the idea that Democratic electorates tend to be more supportive of female candidates, while Republican electorates may be less responsive to gender as an advantage. As a result, gender is likely to have a conditional effect on electoral success rather than a uniform one across parties.</p>
 <h2 id="data">Data</h2>
 <p>The data used in this analysis comes from a combined data set of Democratic and Republican results from the 2022 primary elections. The explanatory variables are party, determined by which primary the candidate is running in, and gender, determined by campaign materials and interviews with candidates. The outcome variable is primary election success, which is measured by the percentage of votes a candidate got during the 2022 primary election.</p>
 <p>The graph below displays the distribution of primary election vote share, the main outcome of interest. Additionally, it indicates the different distribution of male and female vote shares to illustrate how that variation of interest looks.</p>
@@ -2398,9 +2398,9 @@ distill-header .nav a {
 <center>
 <strong>Party Hypothesis</strong>
 </center>
-<p><em>Null Hypothesis:</em> Gender will have no impact on primary election results in either party.</p>
-<p><em>Alternative Hypothesis:</em> Gender affects primary election success; this effect may differ across parties.</p>
-<p>Using α = 0.05, the null hypothesis can be rejected if the p-value for one or both of the political parties is less than 0.05. This would indicate that gender does affect primary election results, even if that effect varies across party lines.</p>
+<p><em>Null Hypothesis:</em> Gender will have no impact on primary election results within each party.</p>
+<p><em>Alternative Hypothesis:</em> Gender impacts primary election success within each party.</p>
+<p>Using α = 0.05, the null hypothesis can be rejected if the p-value both parties is less than 0.05. This would indicate that gender does affect primary election results, even if that effect varies across party lines in terms of advantage or disadvantage.</p>
 <center>
 <strong>Interaction Hypothesis</strong>
 </center>
@@ -2500,7 +2500,7 @@ distill-header .nav a {
 </tbody>
 </table>
 </div>
-<p>Using the standard errors and p-values, it can be concluded that only the interaction hypothesis is statistically significant under α = 0.05.</p>
+<p><em>Using the standard errors and p-values, it can be concluded that only the interaction hypothesis is statistically significant under α = 0.05.</em></p>
 <p>The gender hypothesis can not be rejected because the p-value for the difference between male and female Republicans is greater than the 0.05 level. This means that there is not sufficient information to reject the null hypothesis and prove that the observed difference between the genders was not due to chance alone.</p>
 <p>Despite this, the interaction hypothesis can still be proven because the p-value for the interaction coefficient is less than 0.05. Indicating that we can reject the null hypothesis and prove with statistical significance that there is a difference in the effect of gender on primary election success between Democrats and Republicans, and the results found from the regression were likely not due to chance alone. While there is statistical significance, this relationship can not be deemed causal. Since the data comes from an observational study rather than a randomly assigned experiment, it is possible that the outcome stems from a missed confounding variable. The nature of this analysis does account for one possible confounding variable, party, however there are still other variables that could be effecting the results. Without controlling for these potential confounders or using a causal research design, the results can only demonstrate correlation, not causation.</p>
 <h2 id="conclusion">Conclusion</h2>
