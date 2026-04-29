@@ -21,7 +21,8 @@ rep_candidates <- read_csv("data/rep_candidates.csv")
 
 ## Introduction
 
-**How does gender impact candidate success in primary elections for the different political parties?**
+<center> **How does gender impact candidate success in primary elections for the different political parties?** </center>
+
 
 Gender has long been considered an important factor in electoral politics, particularly in recent decades as the number of female candidates has increased across party lines. By narrowing in on primary elections, it is possible to examine gendered differences in primary success both within and between the Democratic and Republican parties. Understanding this relationship is important as it sheds light on whether barriers or advantages for women exist and whether these patterns differ across partisan contexts.
 
@@ -43,8 +44,7 @@ elections <- elections |>
   filter(Gender != "Nonbinary")
 ```
 
-The data used in this analysis comes from a combined data set of Democratic and Republican results from the 2022 primary elections. The explanatory variables are party, determined by which primary the candidate is running in, and gender, determined by campaign materials and interviews with candidates. The outcome variable is primary election success, which is measured by the percentage of votes a candidate got during the 2022 primary election. 
-
+The data used in this analysis comes from a combined data set of Democratic and Republican results from the 2022 primary elections. The predictor variables are party, determined by which primary the candidate is running in, and gender, determined by campaign materials and interviews with candidates. The outcome variable is primary election success, which is measured by the percentage of votes a candidate got during the initial 2022 primary election, not examining run off elections. 
 
 The graph below displays the distribution of primary election vote share, the main outcome of interest. Additionally, it indicates the different distribution of male and female vote shares to illustrate how that variation of interest looks.
 
@@ -68,7 +68,7 @@ For this paper, there are two comparisons of interest: the difference between ma
 
 *Alternative Hypothesis:* Gender impacts primary election success within each party.
 
-Using α = 0.05, the null hypothesis can be rejected if the p-value both parties is less than 0.05. This would indicate that gender does affect primary election results, even if that effect varies across party lines in terms of advantage or disadvantage.
+Using α = 0.05, the null hypothesis can be rejected if the p-values of both parties is less than 0.05. This would indicate that gender does affect primary election results, even if that effect varies across party lines in terms of advantage or disadvantage.
 
 <center> **Interaction Hypothesis** </center>
 
@@ -94,8 +94,7 @@ party_gender_success <- elections |> group_by(Party, Gender) |>
 party_gender_success
 ```
 
-This graph demonstrates primary success based on gender within the two main political parties. The average Democratic vote percentage for female candidates is just over 50%, whereas female Republicans only got an average of under 30% in their elections. Female candidates in Democratic primaries saw greater success than those in Republican primaries. Furthermore, the graph demonstrates that Democratic women not only saw more success in absolute vote share than Republican women, but they also had greater success compared to their male counterparts than Republican women.
-
+The graph shows that gender affects candidate success differently across political parties. In Democratic primaries, female candidates receive significantly higher average vote shares than male candidates, indicating a clear advantage for women. In contrast, among Republicans, male candidates hold a slight edge over female candidates, suggesting little to no advantage for women. Overall, this pattern supports the conclusion that the impact of gender on primary election outcomes is conditional on party affiliation rather than consistent across parties.
 
 <center> **Regression** </center>
 ```{r, echo=FALSE}
@@ -146,8 +145,7 @@ knitr::kable(p_values, digits = 2,
 
 The gender hypothesis can not be rejected because the p-value for the difference between male and female Republicans is greater than the 0.05 level. This means that there is not sufficient information to reject the null hypothesis and prove that the observed difference between the genders was not due to chance alone. 
 
-Despite this, the interaction hypothesis can still be proven because the p-value for the interaction coefficient is less than 0.05. Indicating that we can reject the null hypothesis and prove with statistical significance that there is a difference in the effect of gender on primary election success between Democrats and Republicans, and the results found from the regression were likely not due to chance alone. While there is statistical significance, this relationship can not be deemed causal. Since the data comes from an observational study rather than a randomly assigned experiment, it is possible that the outcome stems from a missed confounding variable. The nature of this analysis does account for one possible confounding variable, party, however there are still other variables that could be effecting the results. Without controlling for these potential confounders or using a causal research design, the results can only demonstrate correlation, not causation.
-
+Despite this, the interaction hypothesis can still be proven because the p-value for the interaction coefficient is less than 0.05. Indicating that the interaction null hypothesis can be rejected and proves with statistical significance that there is a difference in the effect of gender on primary election success between Democrats and Republicans, and the results found from the regression were likely not due to chance alone. While there is statistical significance, this relationship can not be deemed causal. Since the data comes from an observational study rather than a randomly assigned experiment, it is possible that the outcome stems from a missed confounding variable. The nature of this analysis does account for one possible confounding variable, party, however there are still other variables that could be affecting the results. Without controlling for more potential confounders or using a causal research design, the results can only demonstrate correlation, not causation.
 
 ## Conclusion
 
