@@ -44,7 +44,8 @@ elections <- elections |>
   filter(Gender != "Nonbinary")
 ```
 
-The data used in this analysis comes from a combined dataset of Democratic and Republican results from the 2022 primary elections. The predictor variables used are party, determined by which primary the candidate is running in, and gender, determined by the candidate’s campaign materials. The outcome variable is primary election success, which is measured by the percentage of votes a candidate got during the initial 2022 primary election, not examining run off elections. 
+The data used in this analysis comes from a combined dataset of Democratic and Republican results from the 2022 primary elections. The predictor variables used are party, determined by which primary the candidate is running in, and gender, determined by the candidate’s campaign materials. The outcome variable is primary election success, which is measured by the percentage of votes a candidate got during the initial 2022 primary election, not examining run off elections. The following analysis uses a cross-sectional observational design, comparing candidates at a single point in time rather than tracking changes over time. 
+
 
 The graph below displays the distribution of primary election vote share, the main outcome of interest. Additionally, it indicates the different distribution of male and female vote shares to illustrate how that variation of interest looks.
 
