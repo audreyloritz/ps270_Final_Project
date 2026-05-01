@@ -55,7 +55,7 @@ interest <- ggplot(elections, aes(x = `Primary %`, fill = Gender)) +
   geom_histogram() +
   scale_fill_manual(values = c("Female" = "pink", "Male" = "lightblue")) +
   labs(x = "Average Primary Vote Percentage", y = "Count",
-       title = "Distrabution of Primary Vote Percentages by Gender",
+       title = "Distribution of Primary Vote Percentages by Gender",
        subtitle = "Data from 2022 primary elections")
 
 interest
